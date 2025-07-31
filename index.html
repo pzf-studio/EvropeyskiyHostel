@@ -1,0 +1,591 @@
+<!DOCTYPE html>
+<html lang="ru" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Evropeyskiy Hostel | Москва</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <!-- Шапка -->
+    <header class="header">
+        <div class="container">
+            <a href="#" class="logo">
+                <img src="images/logo1.png" alt="Evropeyskiy Hostel" class="logo-img">
+                <div class="logo-text">
+                    <span>EVROPEYSKIY</span>
+                    <span>HOSTEL</span>
+                </div>
+            </a>
+            <nav class="nav">
+                <div class="nav-links">
+                    <a href="#advantages">Преимущества</a>
+                    <a href="#rooms">Номера</a>
+                    
+                    <a href="#gallery">Галерея</a>
+                    <a href="#contacts">Контакты</a>
+                </div>
+                <a href="#booking" class="btn">Забронировать</a>
+                <div class="nav-indicator"></div>
+            </nav>
+            <div class="mobile-menu-btn">
+                <i class="fas fa-bars"></i>
+            </div>
+        </div>
+    </header>
+
+
+
+    <!-- Обновленная секция Hero -->
+    <section class="hero">
+        <div class="slides-container">
+            <div class="slide active" style="background-image: url('images/hero-bg1.jpg');"></div>
+            <div class="slide" style="background-image: url('images/hero-bg2.jpg');"></div>
+            <div class="slide" style="background-image: url('images/hero-bg3.jpg');"></div>
+            <div class="slide" style="background-image: url('images/hero-bg4.jpg');"></div>
+        </div>
+        
+        <!-- Добавляем канвас для частиц -->
+        <canvas id="particle-canvas"></canvas>
+        
+        <!-- Добавляем контейнер для 3D модели -->
+        <div id="webgl-container"></div>
+        
+        <div class="hero-content">
+            <div class="hero-text">
+                <h1 class="hero-title">
+                    <span class="text-reveal">Европейский хостел</span>
+                    <span class="text-reveal subtitle">Сеть мини-отелей в Москве</span>
+                </h1>
+                <p class="hero-subtitle">От <span class="price pulse">500₽</span> за ночь · Бесплатный Wi-Fi · 5 минут до метро</p>
+                <a href="#booking" class="btn btn-hero magnetic">
+                    <span>Забронировать сейчас</span>
+                    <i class="fas fa-arrow-right"></i>
+                </a>
+            </div>
+            <div class="hero-scroll-hint">
+                <div class="scroll-circle"></div>
+            </div>
+        </div>
+        
+        <!-- Градиентный оверлей -->
+
+        
+        <!-- Пагинация -->
+        <div class="pagination-dots"></div>
+    </section>
+
+
+    <section id="booking" class="section">
+        <div class="container">
+            <div class="booking-card">
+                <div class="booking-form">
+                    <h2>Онлайн-бронирование</h2>
+                    <div class="booking-progress">
+                        <div class="progress-step active">1. Выбор хостела</div>
+                        <div class="progress-step">2. Даты</div>
+                        <div class="progress-step">3. Подтверждение</div>
+                    </div>
+                    
+                    <form id="booking-form">
+                        <!-- Шаг 1: Выбор хостела -->
+                        <div class="booking-step active" data-step="1">
+                            <h3>Выберите хостел</h3>
+                            <div class="hostel-cards">
+                                <div class="hostel-card" data-hostel="Бульвар Дмитрия Донского">
+                                    <div class="hostel-image" style="background-image: url('images/room1.jpg');"></div>
+                                    <div class="hostel-info">
+                                        <h4>м. Бульвар Дмитрия Донского</h4>
+                                        <p>4-местный номер</p>
+                                        <div class="hostel-price">от 500₽/ночь</div>
+                                    </div>
+                                    <div class="hostel-select"></div>
+                                </div>
+                                
+                                <!-- Повторить для других хостелов -->
+                            </div>
+                        </div>
+                        
+                        <!-- Шаг 2: Выбор дат -->
+                        <div class="booking-step" data-step="2">
+                            <h3>Выберите даты проживания</h3>
+                            <div class="date-selection">
+                                <div class="form-group">
+                                    <label>Заезд</label>
+                                    <input type="date" id="checkin-date" class="form-input">
+                                </div>
+                                <div class="form-group">
+                                    <label>Выезд</label>
+                                    <input type="date" id="checkout-date" class="form-input">
+                                </div>
+                            </div>
+                            <div class="calendar-placeholder">
+                                <!-- Календарь будет добавлен через JS -->
+                                <div class="calendar-loading">
+                                    <i class="fas fa-spinner fa-spin"></i>
+                                    Загрузка календаря...
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Шаг 3: Подтверждение -->
+                        <div class="booking-step" data-step="3">
+                            <h3>Подтверждение бронирования</h3>
+                            <div class="booking-summary">
+                                <div class="summary-item">
+                                    <span>Хостел:</span>
+                                    <span id="summary-hostel">-</span>
+                                </div>
+                                <div class="summary-item">
+                                    <span>Даты:</span>
+                                    <span id="summary-dates">-</span>
+                                </div>
+                                <div class="summary-item">
+                                    <span>Ночей:</span>
+                                    <span id="summary-nights">0</span>
+                                </div>
+                                <div class="summary-item total">
+                                    <span>Итого:</span>
+                                    <span id="summary-total">0₽</span>
+                                </div>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label>Имя</label>
+                                <input type="text" class="form-input" required>
+                            </div>
+                            <div class="form-group">
+                                <label>Телефон</label>
+                                <input type="tel" class="form-input" required>
+                            </div>
+                            <div class="form-group">
+                                <label>Email</label>
+                                <input type="email" class="form-input" required>
+                            </div>
+                        </div>
+                        
+                        <div class="booking-controls">
+                            <button type="button" class="btn btn-prev" disabled>
+                                <i class="fas fa-arrow-left"></i> Назад
+                            </button>
+                            <button type="button" class="btn btn-next">
+                                Далее <i class="fas fa-arrow-right"></i>
+                            </button>
+                            <button type="submit" class="btn btn-submit">
+                                Подтвердить бронирование
+                            </button>
+                        </div>
+                    </form>
+                </div>
+                
+                <div class="booking-info">
+                    <h3>Специальное предложение</h3>
+                    <p>При бронировании от 3 ночей получите скидку 10%!</p>
+                    <div class="features">
+                        <div class="feature">
+                            <i class="fas fa-check-circle"></i>
+                            <span>Бесплатная отмена за 48 часов</span>
+                        </div>
+                        <div class="feature">
+                            <i class="fas fa-check-circle"></i>
+                            <span>Без предоплаты</span>
+                        </div>
+                        <div class="feature">
+                            <i class="fas fa-check-circle"></i>
+                            <span>Лучшая цена гарантирована</span>
+                        </div>
+                    </div>
+                    
+                    <div class="discount-banner">
+                        <div class="discount-content">
+                            <span>СКИДКА 10%</span>
+                            <span>при бронировании от 3-х ночей</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Преимущества -->
+    <section id="advantages" class="section">
+        <div class="container">
+            <div class="advantages-container">
+                <div class="features-interactive">
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-wifi"></i>
+                        </div>
+                        <div class="feature-content">
+                            <h3>Скоростной Wi-Fi</h3>
+                            <p>До 100 Мбит/с на всей территории</p>
+                            <div class="speed-meter">
+                                <div class="speed-bar" data-speed="98"></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-subway"></i>
+                        </div>
+                        <div class="feature-content">
+                            <h3>Удобное расположение</h3>
+                            <p>Время до метро</p>
+                            <div class="distance-meter">
+                                <div class="distance-bar" data-distance="5"></div>
+                                <div class="distance-labels">
+                                    <span>0 мин</span>
+                                    <span>10 мин</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-bed"></i>
+                        </div>
+                        <div class="feature-content">
+                            <h3>Комфортные условия</h3>
+                            <p>Средний рейтинг гостей</p>
+                            <div class="rating-stars">
+                                <div class="stars" data-rating="4.8">
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star-half-alt"></i>
+                                </div>
+                                <span>4.8/5</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-percentage"></i>
+                        </div>
+                        <div class="feature-content">
+                            <h3>Выгодные цены</h3>
+                            <p>Экономия по сравнению с отелями</p>
+                            <div class="savings-gauge">
+                                <div class="gauge-circle" data-percent="65">
+                                    <span>65%</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Номера -->
+    <section id="rooms" class="section">
+        <div class="container">
+            <h2 class="section-title">Наши Хостелы</h2>
+            <div class="rooms-grid">
+                <div class="room-card">
+                    <div class="room-image" style="background-image: url('images/room1.jpg');">
+                        <div class="price-tag">от 500₽/ночь</div>
+                    </div>
+                    <div class="room-info">
+                        <h3>м. Бульвар Дмитрия Донского</h3>
+                        <p>Просторный номер с 4 отдельными кроватями</p>
+                        <ul>
+                            <li><i class="fas fa-user-friends"></i> 4 человека</li>
+                            <li><i class="fas fa-bed"></i> Отдельные кровати</li>
+                            <li><i class="fas fa-lock"></i> Индивидуальные шкафчики</li>
+                        </ul>
+                        <a href="#booking" class="btn-outline">Забронировать</a>
+                    </div>
+                </div>
+                
+                <div class="room-card">
+                    <div class="room-image" style="background-image: url('images/room2.jpg');">
+                        <div class="price-tag">от 500₽/ночь</div>
+                    </div>
+                    <div class="room-info">
+                        <h3>м. Пражская</h3>
+                        <p>Комфортабельный номер для большой компании</p>
+                        <ul>
+                            <li><i class="fas fa-user-friends"></i> 6 человек</li>
+                            <li><i class="fas fa-bed"></i> Двухъярусные кровати</li>
+                            <li><i class="fas fa-tv"></i> Зона отдыха</li>
+                        </ul>
+                        <a href="#booking" class="btn-outline">Забронировать</a>
+                    </div>
+                </div>
+
+                <!-- Новые хостелы -->
+                <div class="room-card">
+                    <div class="room-image" style="background-image: url('images/room3.jpg');">
+                        <div class="price-tag">от 500₽/ночь</div>
+                    </div>
+                    <div class="room-info">
+                        <h3>м. Нахимовский проспект</h3>
+                        <p>Современный хостел с панорамными окнами</p>
+                        <ul>
+                            <li><i class="fas fa-user-friends"></i> 6 человек</li>
+                            <li><i class="fas fa-bed"></i> Удобные кровати</li>
+                            <li><i class="fas fa-parking"></i> Парковка рядом</li>
+                        </ul>
+                        <a href="#booking" class="btn-outline">Забронировать</a>
+                    </div>
+                </div>
+
+                <div class="room-card">
+                    <div class="room-image" style="background-image: url('images/room4.jpg');">
+                        <div class="price-tag">от 500₽/ночь</div>
+                    </div>
+                    <div class="room-info">
+                        <h3>м. Балтийская</h3>
+                        <p>Стильный хостел в историческом районе</p>
+                        <ul>
+                            <li><i class="fas fa-user-friends"></i> 6 человек</li>
+                            <li><i class="fas fa-bed"></i> Комфортные спальные места</li>
+                            <li><i class="fas fa-tshirt"></i> Прачечная</li>
+                        </ul>
+                        <a href="#booking" class="btn-outline">Забронировать</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Галерея -->
+    <section id="gallery" class="section">
+        <div class="container">
+            <h2 class="section-title">Фотогалерея</h2>
+            <div class="gallery-container compact">
+                <!-- Основной слайдер -->
+                <div class="main-slider">
+                    <div class="main-slide">
+                        <img src="" alt="Фото хостела" class="main-image active">
+                    </div>
+                    <div class="gallery-info">
+                        <div class="gallery-address">
+                            <i class="fas fa-map-marker-alt"></i>
+                            <span class="address-text">Выберите хостел</span>
+                        </div>
+                        <div class="gallery-nav">
+                            <button class="gallery-prev"><i class="fas fa-chevron-left"></i></button>
+                            <button class="gallery-next"><i class="fas fa-chevron-right"></i></button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Миниатюры по хостелам -->
+                <div class="hostel-thumbnails">
+                    <div class="hostel-group" data-hostel="Бульвар Дмитрия донского">
+                        <h3><i class="fas fa-hotel"></i> м. Бульвар Дмитрия донского</h3>
+                        <div class="thumbnails-row">
+                            <!-- Миниатюры будут добавлены через JS -->
+                        </div>
+                    </div>
+                    <div class="hostel-group" data-hostel="Пражская">
+                        <h3><i class="fas fa-hotel"></i> м. Бульвар Дмитрия донского</h3>
+                        <div class="thumbnails-row">
+                            <!-- Миниатюры будут добавлены через JS -->
+                        </div>
+                    </div>
+                    <div class="hostel-group" data-hostel="Бульвар Дмитрия донского">
+                        <h3><i class="fas fa-hotel"></i> м. Бульвар Дмитрия донского</h3>
+                        <div class="thumbnails-row">
+                            <!-- Миниатюры будут добавлены через JS -->
+                        </div>
+                    </div>
+                    <div class="hostel-group" data-hostel="Бульвар Дмитрия донского">
+                        <h3><i class="fas fa-hotel"></i> м. Бульвар Дмитрия донского</h3>
+                        <div class="thumbnails-row">
+                            <!-- Миниатюры будут добавлены через JS -->
+                        </div>
+                    </div>                                                            
+                    <!-- Остальные группы в аналогичном формате -->
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Бронирование -->
+
+
+    <!-- Контакты -->
+    <section id="contacts" class="section">
+        <div class="container">
+            <h2 class="section-title">Контакты</h2>
+            <div class="contacts-grid">
+                <div class="contact-info">
+                    <h3>Адреса хостелов</h3>
+                    <ul class="address-list">
+                        <li>
+                            <a href="https://yandex.ru/maps/?text=Москва, Бульвар Дмитрия Донского, 17" target="_blank">
+                                <i class="fas fa-map-marker-alt"></i> Москва, Бульвар Дмитрия Донского, 17
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://yandex.ru/maps/?text=Москва, Кировоградская улица, 17к1А" target="_blank">
+                                <i class="fas fa-map-marker-alt"></i> Москва, Кировоградская улица, 17к1А
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://yandex.ru/maps/?text=Москва, Варшавское шоссе 60" target="_blank">
+                                <i class="fas fa-map-marker-alt"></i> Москва, Варшавское шоссе 60
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://yandex.ru/maps/?text=Москва, Ленинградское шоссе 25к1" target="_blank">
+                                <i class="fas fa-map-marker-alt"></i> Москва, Ленинградское шоссе 25к1
+                            </a>
+                        </li>
+                    </ul>
+                    <h3>Телефон</h3>
+                    <p><i class="fas fa-phone"></i> +7 (499) 226-20-16 - единый номер</p>
+                    
+                    <h3>Email</h3>
+                    <p><i class="fas fa-envelope"></i> evropeyskiyhostel@mail.ru</p>
+                    
+                    <h3>Социальные сети</h3>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-vk"></i></a>
+                        <a href="#"><i class="fab fa-telegram"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                    </div>
+                </div>
+                <div class="contact-map">
+                    <div id="yandex-map"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Подвал -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <h4>Evropeyskiy Hostel</h4>
+                    <p>Комфортные хостелы в центре Москвы по доступным ценам. Лучший выбор для бюджетных путешественников.</p>
+                </div>
+                
+                <div class="footer-col">
+                    <h4>Навигация</h4>
+                    <ul>
+                        <li><a href="#rooms">Номера</a></li>
+                        <li><a href="#advantages">Преимущества</a></li>
+                        <li><a href="#gallery">Галерея</a></li>
+                        <li><a href="#contacts">Контакты</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-col">
+                    <h4>Контакты</h4>
+                    <ul>
+                        <li><i class="fas fa-map-marker-alt"></i> Москва, Бульвар Дмитрия Донского, 17</li>
+                        <li><i class="fas fa-phone"></i> +7 (499) 226-20-16</li>
+                        <li><i class="fas fa-envelope"></i> evropeyskiyhostel@mail.ru</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; 2025 Evropeyskiy Hostel. Все права защищены.</p>
+                <div class="legal-links">
+                    <a href="#">Политика конфиденциальности</a>
+                    <a href="#">Условия использования</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+    <script src="https://api-maps.yandex.ru/2.1/?apikey=ваш_API_ключ&lang=ru_RU"></script>
+    <script>
+        ymaps.ready(init);
+        
+        function init() {
+            var map = new ymaps.Map('yandex-map', {
+                center: [55.751574, 37.573856],
+                zoom: 11,
+                controls: ['zoomControl']
+            });
+
+            // Создаем свою иконку с логотипом
+            var hostelIcon = new ymaps.Placemark(
+                [0, 0], {}, {
+                    iconLayout: 'default#image',
+                    iconImageHref: 'images/Loggo2.png', // Путь к вашему логотипу
+                    iconImageSize: [40, 40], // Размер иконки
+                    iconImageOffset: [-20, -20] // Смещение (центрирование)
+                }
+            );
+
+            // Массив с адресами хостелов
+            var hostels = [
+                {
+                    coords: [55.563625, 37.573690],
+                    address: 'Бульвар Дмитрия Донского, 17',
+                    hint: 'Хостел на Бульваре Дмитрия Донского'
+                },
+                {
+                    coords: [55.609055, 37.604951],
+                    address: 'Кировоградская улица, 17к1А',
+                    hint: 'Хостел на Кировоградской'
+                },
+                {
+                    coords: [55.662039, 37.618695],
+                    address: 'Варшавское шоссе 60',
+                    hint: 'Хостел на Варшавском шоссе'
+                },
+                {
+                    coords: [55.827176, 37.488880],
+                    address: 'Ленинградское шоссе 25к1',
+                    hint: 'Хостел на Ленинградском шоссе'
+                }
+            ];
+
+            // Создаем кластер с кастомной иконкой
+            var clusterer = new ymaps.Clusterer({
+                clusterIconLayout: 'default#image',
+                clusterIconImageHref: 'images/Loggo2.png',
+                clusterIconImageSize: [50, 50],
+                clusterIconImageOffset: [-25, -25],
+                clusterDisableClickZoom: true,
+                clusterHideIconOnBalloonOpen: false,
+                geoObjectHideIconOnBalloonOpen: false
+            });
+
+            // Добавляем метки на карту
+            hostels.forEach(function(hotel) {
+                var placemark = new ymaps.Placemark(
+                    hotel.coords,
+                    {
+                        hintContent: hotel.hint,
+                        balloonContent: hotel.address
+                    },
+                    {
+                        iconLayout: 'default#image',
+                        iconImageHref: 'images/Loggo2.png',
+                        iconImageSize: [40, 40],
+                        iconImageOffset: [-20, -20]
+                    }
+                );
+                clusterer.add(placemark);
+            });
+
+            map.geoObjects.add(clusterer);
+            
+            // Автоматически подбираем масштаб
+            if (hostels.length > 0) {
+                map.setBounds(clusterer.getBounds(), {
+                    checkZoomRange: true
+                });
+            }
+        }
+    </script>
+</body>
+</html>
