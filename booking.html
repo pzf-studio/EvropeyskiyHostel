@@ -1,5 +1,289 @@
-    --blue-700: #1e3a8a;
-    --blue-600: #2563eb;
-    --blue-500: #3b82f6;
-    --blue-400: #60a5fa;
-    --blue-300: #93c5fd;
+<!DOCTYPE html>
+<html lang="ru" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Бронирование | Evropeyskiy Hostel</title>
+    <link rel="stylesheet" href="booking.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <!-- Шапка -->
+    <header class="header">
+        <div class="container">
+            <a href="index.html" class="logo">
+                <img src="images/logo1.png" alt="Evropeyskiy Hostel" class="logo-img">
+                <div class="logo-text">
+                    <span>EVROPEYSKIY</span>
+                    <span>HOSTEL</span>
+                </div>
+            </a>
+            <nav class="nav">
+                <div class="nav-links">
+                    <a href="index.html#advantages">Преимущества</a>
+                    <a href="index.html#rooms">Номера</a>
+                    <a href="index.html#gallery">Галерея</a>
+                    <a href="index.html#contacts">Контакты</a>
+                </div>
+                <a href="booking.html" class="btn active">Забронировать</a>
+                <div class="nav-indicator"></div>
+            </nav>
+            <div class="mobile-menu-btn">
+                <i class="fas fa-bars"></i>
+            </div>
+        </div>
+    </header>
+
+    <!-- Основной контент бронирования -->
+    <main class="booking-main">
+        <div class="container">
+            <div class="booking-header">
+                <h1>Бронирование номера</h1>
+                <p>Заполните форму ниже, чтобы забронировать номер в нашем хостеле</p>
+            </div>
+
+            <!-- Прогресс бронирования -->
+            <div class="booking-progress">
+                <div class="progress-step active" data-step="1">
+                    <span>1</span>
+                    Выбор хостела
+                </div>
+                <div class="progress-step" data-step="2">
+                    <span>2</span>
+                    Даты проживания
+                </div>
+                <div class="progress-step" data-step="3">
+                    <span>3</span>
+                    Подтверждение
+                </div>
+            </div>
+
+            <!-- Шаги бронирования -->
+            <div class="booking-steps">
+                <!-- Шаг 1: Выбор хостела -->
+                <div class="booking-step active" data-step="1">
+                    <h2>Выберите хостел</h2>
+                    <p>Выберите один из наших хостелов в Москве</p>
+                    
+                    <div class="hostel-cards">
+                        <div class="hostel-card" data-hostel="Бульвар Дмитрия Донского">
+                            <div class="hostel-image" style="background-image: url('images/room1.jpg');"></div>
+                            <div class="hostel-info">
+                                <h3>м. Бульвар Дмитрия Донского</h3>
+                                <p>Просторный номер с 4 отдельными кроватями</p>
+                                <div class="hostel-price">от 500₽/ночь</div>
+                                <div class="hostel-select"></div>
+                            </div>
+                        </div>
+                        
+                        <div class="hostel-card" data-hostel="Пражская">
+                            <div class="hostel-image" style="background-image: url('images/room2.jpg');"></div>
+                            <div class="hostel-info">
+                                <h3>м. Пражская</h3>
+                                <p>Комфортабельный номер для большой компании</p>
+                                <div class="hostel-price">от 500₽/ночь</div>
+                                <div class="hostel-select"></div>
+                            </div>
+                        </div>
+                        
+                        <div class="hostel-card" data-hostel="Нахимовский проспект">
+                            <div class="hostel-image" style="background-image: url('images/room3.jpg');"></div>
+                            <div class="hostel-info">
+                                <h3>м. Нахимовский проспект</h3>
+                                <p>Современный хостел с панорамными окнами</p>
+                                <div class="hostel-price">от 500₽/ночь</div>
+                                <div class="hostel-select"></div>
+                            </div>
+                        </div>
+                        
+                        <div class="hostel-card" data-hostel="Балтийская">
+                            <div class="hostel-image" style="background-image: url('images/room4.jpg');"></div>
+                            <div class="hostel-info">
+                                <h3>м. Балтийская</h3>
+                                <p>Стильный хостел в историческом районе</p>
+                                <div class="hostel-price">от 500₽/ночь</div>
+                                <div class="hostel-select"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Шаг 2: Выбор дат -->
+                <div class="booking-step" data-step="2">
+                    <h2>Выберите даты проживания</h2>
+                    <p>Укажите даты заезда и выезда</p>
+                    
+                    <div class="date-selection">
+                        <div class="form-group">
+                            <label for="checkin-date">Дата заезда</label>
+                            <input type="date" id="checkin-date" name="checkin-date" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="checkout-date">Дата выезда</label>
+                            <input type="date" id="checkout-date" name="checkout-date" required>
+                        </div>
+                    </div>
+                    
+                    <div class="calendar-placeholder">
+                        <div class="calendar-loading">
+                            <i class="fas fa-spinner fa-spin"></i>
+                            <p>Загрузка календаря...</p>
+                        </div>
+                    </div>
+                    
+                    <div class="discount-banner">
+                        <div class="discount-content">
+                            <span>Скидка 10%</span>
+                            <span>При бронировании от 3 ночей</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Шаг 3: Подтверждение -->
+                <div class="booking-step" data-step="3">
+                    <h2>Подтверждение бронирования</h2>
+                    <p>Проверьте детали вашего бронирования</p>
+                    
+                    <div class="booking-summary">
+                        <div class="summary-item">
+                            <span>Хостел:</span>
+                            <span id="summary-hostel">Не выбран</span>
+                        </div>
+                        <div class="summary-item">
+                            <span>Даты:</span>
+                            <span id="summary-dates">Не выбраны</span>
+                        </div>
+                        <div class="summary-item">
+                            <span>Количество ночей:</span>
+                            <span id="summary-nights">0</span>
+                        </div>
+                        <div class="summary-item">
+                            <span>Цена за ночь:</span>
+                            <span>500₽</span>
+                        </div>
+                        <div class="summary-item total">
+                            <span>Итого:</span>
+                            <span id="summary-total">0₽</span>
+                        </div>
+                    </div>
+                    
+                    <div class="personal-info">
+                        <h3>Ваши контактные данные</h3>
+                        <p>Пожалуйста, заполните информацию для связи</p>
+                        
+                        <div class="form-group">
+                            <input type="text" id="name" name="name" placeholder="Ваше имя" required>
+                            <label for="name">Имя</label>
+                        </div>
+                        
+                        <div class="form-group">
+                            <input type="email" id="email" name="email" placeholder="Ваш email" required>
+                            <label for="email">Email</label>
+                        </div>
+                        
+                        <div class="form-group">
+                            <input type="tel" id="phone" name="phone" placeholder="Ваш телефон">
+                            <label for="phone">Телефон</label>
+                        </div>
+                        
+                        <div class="form-group">
+                            <textarea id="comments" name="comments" placeholder="Дополнительные пожелания"></textarea>
+                            <label for="comments">Комментарии</label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Навигация по шагам -->
+            <div class="booking-controls">
+                <button class="btn btn-prev" disabled>
+                    <i class="fas fa-chevron-left"></i>
+                    <span>Назад</span>
+                </button>
+                
+                <button class="btn btn-next">
+                    <span>Далее</span>
+                    <i class="fas fa-chevron-right"></i>
+                </button>
+                
+                <button class="btn btn-submit">
+                    <span>Подтвердить бронирование</span>
+                    <i class="fas fa-paper-plane"></i>
+                </button>
+            </div>
+        </div>
+    </main>
+
+    <!-- Подвал -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <h4>Evropeyskiy Hostel</h4>
+                    <p>Комфортные хостелы в центре Москвы по доступным ценам. Лучший выбор для бюджетных путешественников.</p>
+                </div>
+                
+                <div class="footer-col">
+                    <h4>Навигация</h4>
+                    <ul>
+                        <li><a href="index.html#rooms">Номера</a></li>
+                        <li><a href="index.html#advantages">Преимущества</a></li>
+                        <li><a href="index.html#gallery">Галерея</a></li>
+                        <li><a href="index.html#contacts">Контакты</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-col">
+                    <h4>Контакты</h4>
+                    <ul>
+                        <li><i class="fas fa-map-marker-alt"></i> Москва, Бульвар Дмитрия Донского, 17</li>
+                        <li><i class="fas fa-phone"></i> +7 (499) 226-20-16</li>
+                        <li><i class="fas fa-envelope"></i> evropeyskiyhostel@mail.ru</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; 2025 Evropeyskiy Hostel. Все права защищены.</p>
+                <div class="legal-links">
+                    <a href="#">Политика конфиденциальности</a>
+                    <a href="#">Условия использования</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Модальное окно подтверждения -->
+    <div class="modal-overlay" id="confirmation-modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Бронирование подтверждено!</h2>
+                <button class="modal-close"><i class="fas fa-times"></i></button>
+            </div>
+            <div class="modal-body">
+                <div class="confirmation-icon">
+                    <i class="fas fa-check-circle"></i>
+                </div>
+                <p>Спасибо за бронирование в нашем хостеле. Детали бронирования были отправлены на ваш email.</p>
+                <div class="confirmation-details">
+                    <p><strong>Номер бронирования:</strong> <span id="booking-number">HST-2025-XXXX</span></p>
+                    <p><strong>Хостел:</strong> <span id="confirmation-hostel">Не указан</span></p>
+                    <p><strong>Даты:</strong> <span id="confirmation-dates">Не указаны</span></p>
+                    <p><strong>Итого:</strong> <span id="confirmation-total">0₽</span></p>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-modal" id="modal-close-btn">Закрыть</button>
+                <a href="index.html" class="btn btn-outline">На главную</a>
+            </div>
+        </div>
+    </div>
+
+    <script src="booking.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.4/gsap.min.js"></script>
+</body>
+</html>
