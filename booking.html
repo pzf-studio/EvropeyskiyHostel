@@ -119,12 +119,12 @@
                     <div class="date-selection">
                         <div class="form-group">
                             <label for="checkin-date">Дата заезда</label>
-                            <input type="date" id="checkin-date" name="checkin-date" required>
+                            <input type="text" id="checkin-date" name="checkin-date" readonly>
                         </div>
                         
                         <div class="form-group">
                             <label for="checkout-date">Дата выезда</label>
-                            <input type="date" id="checkout-date" name="checkout-date" required>
+                            <input type="text" id="checkout-date" name="checkout-date" readonly>
                         </div>
                     </div>
                     
@@ -135,12 +135,6 @@
                         </div>
                     </div>
                     
-                    <div class="discount-banner">
-                        <div class="discount-content">
-                            <span>Скидка 10%</span>
-                            <span>При бронировании от 3 ночей</span>
-                        </div>
-                    </div>
                 </div>
 
                 <!-- Шаг 3: Подтверждение -->
@@ -158,18 +152,17 @@
                             <span id="summary-dates">Не выбраны</span>
                         </div>
                         <div class="summary-item">
-                            <span>Количество ночей:</span>
-                            <span id="summary-nights">0</span>
+                            <span>Цена за ночь:</span>
+                            <span id="price-per-night">800₽</span>
                         </div>
                         <div class="summary-item">
-                            <span>Цена за ночь:</span>
-                            <span>500₽</span>
+                            <span>Количество ночей:</span>
+                            <span id="summary-nights">0</span>
                         </div>
                         <div class="summary-item total">
                             <span>Итого:</span>
                             <span id="summary-total">0₽</span>
                         </div>
-                    </div>
                     
                     <div class="personal-info">
                         <h3>Ваши контактные данные</h3>

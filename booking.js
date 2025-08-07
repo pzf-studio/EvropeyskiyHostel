@@ -95,10 +95,9 @@ document.addEventListener('DOMContentLoaded', function() {
         const newCheckin = new Date(checkinDateInput.value);
         const newCheckout = new Date(checkoutDateInput.value);
         
-        // Проверка на корректность дат
         if (newCheckout <= newCheckin) {
             alert('Дата выезда должна быть позже даты заезда');
-            checkoutDateInput.value = formatDate(new Date(newCheckin.getTime() + 86400000)); // +1 день
+            checkoutDateInput.value = formatDate(new Date(newCheckin.getTime() + 86400000));
             return;
         }
         
@@ -106,8 +105,6 @@ document.addEventListener('DOMContentLoaded', function() {
         checkoutDate = newCheckout;
         calculateNights();
         updateSummary();
-        
-        // Здесь можно добавить загрузку календаря
         simulateCalendarLoad();
     }
     
@@ -119,12 +116,24 @@ document.addEventListener('DOMContentLoaded', function() {
         
         const diffTime = checkoutDate - checkinDate;
         nightsCount = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
-        totalPrice = nightsCount * 500; // 500 руб за ночь
         
-        // Применение скидки 10% за 3+ ночей
-        if (nightsCount >= 3) {
-            totalPrice = totalPrice * 0.9;
+        // Определяем тариф и цену за ночь
+        let pricePerNight;
+        if (nightsCount === 30) {
+            pricePerNight = 500;
+        } else if (nightsCount >= 15) {
+            pricePerNight = 600;
+        } else if (nightsCount >= 8) {
+            pricePerNight = 700;
+        } else {
+            pricePerNight = 800;
         }
+        
+        // Сохраняем цену за ночь для отображения в сводке
+        document.getElementById('price-per-night').textContent = `${pricePerNight}₽`;
+        
+        // Рассчитываем общую стоимость
+        totalPrice = nightsCount * pricePerNight;
     }
     
     function updateSummary() {
@@ -275,8 +284,71 @@ document.addEventListener('DOMContentLoaded', function() {
                 </div>
             </div>
         `;
+
+        // Обработчики для дней календаря
+        document.querySelectorAll('.calendar-day:not(.booked):not(.past)').forEach(dayElement => {
+            dayElement.addEventListener('click', function() {
+                const day = parseInt(this.textContent);
+                const currentMonth = checkinDate.getMonth();
+                const currentYear = checkinDate.getFullYear();
+                const clickedDate = new Date(currentYear, currentMonth, day);
+                
+                // Если не выбрана дата заезда или кликнули дату раньше текущей заезда
+                if (!checkinDate || clickedDate < checkinDate) {
+                    checkinDate = clickedDate;
+                    checkoutDate = null;
+                } 
+                // Если дата заезда есть, но нет даты выезда
+                else if (checkinDate && !checkoutDate) {
+                    if (clickedDate <= checkinDate) {
+                        // Если кликнули ту же или более раннюю дату
+                        checkinDate = clickedDate;
+                    } else {
+                        // Выбираем дату выезда
+                        checkoutDate = clickedDate;
+                    }
+                }
+                // Если обе даты уже выбраны - начинаем новый выбор
+                else {
+                    checkinDate = clickedDate;
+                    checkoutDate = null;
+                }
+                
+                // Обновляем поля ввода
+                checkinDateInput.value = formatDate(checkinDate);
+                checkoutDateInput.value = checkoutDate ? formatDate(checkoutDate) : '';
+                
+                // Перерисовываем календарь и обновляем данные
+                simulateCalendarLoad();
+                calculateNights();
+                updateSummary();
+            });
+        });
+
+        // Кнопки переключения месяцев
+        document.querySelector('.calendar-prev')?.addEventListener('click', () => {
+            const prevMonth = new Date(checkinDate);
+            prevMonth.setMonth(prevMonth.getMonth() - 1);
+            checkinDate = prevMonth;
+            simulateCalendarLoad();
+        });
+        
+        document.querySelector('.calendar-next')?.addEventListener('click', () => {
+            const nextMonth = new Date(checkinDate);
+            nextMonth.setMonth(nextMonth.getMonth() + 1);
+            checkinDate = nextMonth;
+            simulateCalendarLoad();
+        });
     }
     
+
+    function formatDate(date) {
+        const year = date.getFullYear();
+        const month = String(date.getMonth() + 1).padStart(2, '0');
+        const day = String(date.getDate()).padStart(2, '0');
+        return `${year}-${month}-${day}`;
+    }
+
     function generateCalendarDays(date) {
         const year = date.getFullYear();
         const month = date.getMonth();
@@ -284,24 +356,37 @@ document.addEventListener('DOMContentLoaded', function() {
         const lastDay = new Date(year, month + 1, 0);
         
         let daysHtml = '';
-        const startDay = firstDay.getDay() === 0 ? 6 : firstDay.getDay() - 1; // Пн-Вс (0-6)
+        const startDay = firstDay.getDay() === 0 ? 6 : firstDay.getDay() - 1;
         
         // Пустые ячейки для начала месяца
         for (let i = 0; i < startDay; i++) {
             daysHtml += '<div class="calendar-empty"></div>';
         }
         
+        // Текущая дата для сравнения
+        const today = new Date();
+        today.setHours(0, 0, 0, 0);
+        
         // Дни месяца
         for (let day = 1; day <= lastDay.getDate(); day++) {
             const currentDate = new Date(year, month, day);
-            const isBooked = Math.random() < 0.2; // 20% chance to be booked
-            const isSelected = isSameDay(currentDate, checkinDate) || isSameDay(currentDate, checkoutDate);
-            const isInRange = currentDate > checkinDate && currentDate < checkoutDate;
+            const isBooked = 0;
+            const isPast = currentDate < today;
+            
+            // Проверяем выбранные даты
+            const isSelectedStart = checkinDate && 
+                                currentDate.getTime() === checkinDate.getTime();
+            const isSelectedEnd = checkoutDate && 
+                                currentDate.getTime() === checkoutDate.getTime();
+            const isInRange = checkinDate && checkoutDate && 
+                            currentDate > checkinDate && 
+                            currentDate < checkoutDate;
             
             let dayClass = 'calendar-day';
             if (isBooked) dayClass += ' booked';
-            if (isSameDay(currentDate, checkinDate)) dayClass += ' selected-start';
-            if (isSameDay(currentDate, checkoutDate)) dayClass += ' selected-end';
+            if (isPast) dayClass += ' past';
+            if (isSelectedStart) dayClass += ' selected-start';
+            if (isSelectedEnd) dayClass += ' selected-end';
             if (isInRange) dayClass += ' selected-range';
             
             daysHtml += `<div class="${dayClass}">${day}</div>`;

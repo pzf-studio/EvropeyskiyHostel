@@ -1474,3 +1474,46 @@ body {
         justify-content: center;
     }
 }
+
+.calendar-day {
+    cursor: pointer;
+    padding: 10px 5px;
+    text-align: center;
+    border-radius: 4px;
+    transition: all 0.2s ease;
+    margin: 2px;
+}
+
+.calendar-day:hover:not(.booked):not(.past) {
+    background: var(--blue-400);
+    color: white;
+}
+
+.calendar-day.booked {
+    color: var(--gray-500);
+    text-decoration: line-through;
+    cursor: not-allowed;
+    background: var(--gray-700);
+}
+
+.calendar-day.past {
+    color: var(--gray-500);
+    cursor: not-allowed;
+}
+
+.calendar-day.selected-start {
+    background: var(--blue-600);
+    color: white;
+    border-radius: 50% 0 0 50%;
+}
+
+.calendar-day.selected-end {
+    background: var(--blue-600);
+    color: white;
+    border-radius: 0 50% 50% 0;
+}
+
+.calendar-day.selected-range {
+    background: rgba(59, 130, 246, 0.3);
+    color: white;
+}
