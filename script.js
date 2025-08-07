@@ -871,3 +871,53 @@ function initInteractiveFeatures() {
 
 // Вызовите функцию при загрузке
 document.addEventListener('DOMContentLoaded', initInteractiveFeatures);
+
+// Инициализация сертификатов
+function initCertificates() {
+    const certificatePreviews = document.querySelectorAll('.certificate-preview');
+    const certificateFulls = document.querySelectorAll('.certificate-full');
+    const closeButtons = document.querySelectorAll('.close-certificate');
+    
+    // Обработчик для открытия сертификата
+    certificatePreviews.forEach((preview, index) => {
+        preview.addEventListener('click', () => {
+            certificateFulls[index].classList.add('active');
+            document.body.style.overflow = 'hidden';
+        });
+    });
+    
+    // Обработчик для закрытия сертификата
+    closeButtons.forEach((button, index) => {
+        button.addEventListener('click', (e) => {
+            e.stopPropagation();
+            certificateFulls[index].classList.remove('active');
+            document.body.style.overflow = '';
+        });
+    });
+    
+    // Закрытие при клике вне изображения
+    certificateFulls.forEach(full => {
+        full.addEventListener('click', (e) => {
+            if (e.target === full) {
+                full.classList.remove('active');
+                document.body.style.overflow = '';
+            }
+        });
+    });
+    
+    // Закрытие по ESC
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape') {
+            certificateFulls.forEach(full => {
+                full.classList.remove('active');
+                document.body.style.overflow = '';
+            });
+        }
+    });
+}
+
+// Добавьте вызов функции в DOMContentLoaded
+document.addEventListener('DOMContentLoaded', () => {
+    initCertificates();
+    // ... остальной код инициализации ...
+});
