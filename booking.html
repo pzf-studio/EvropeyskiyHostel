@@ -1,14 +1,12 @@
 <!DOCTYPE html>
 <html lang="ru" data-theme="light">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Бронирование | Evropeyskiy Hostel</title>
     <link rel="stylesheet" href="booking.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
 </head>
 <body>
     <!-- Шапка -->
@@ -28,7 +26,7 @@
                     <a href="index.html#gallery">Галерея</a>
                     <a href="index.html#contacts">Контакты</a>
                 </div>
-                <a href="booking.html" class="btn active">Забронировать</a>
+                <a href="booking.html" class="btn active">Тарифы</a>
                 <div class="nav-indicator"></div>
             </nav>
             <div class="mobile-menu-btn">
@@ -37,177 +35,232 @@
         </div>
     </header>
 
-    <!-- Основной контент бронирования -->
+    <!-- Основной контент -->
     <main class="booking-main">
         <div class="container">
             <div class="booking-header">
-                <h1>Бронирование номера</h1>
-                <p>Заполните форму ниже, чтобы забронировать номер в нашем хостеле</p>
+                <h1>Тарифы и цены</h1>
+                <p>Узнайте наши доступные тарифы и условия проживания в хостелах Evropeyskiy</p>
             </div>
 
-            <!-- Прогресс бронирования -->
-            <div class="booking-progress">
-                <div class="progress-step active" data-step="1">
-                    <span>1</span>
-                    Выбор хостела
-                </div>
-                <div class="progress-step" data-step="2">
-                    <span>2</span>
-                    Даты проживания
-                </div>
-                <div class="progress-step" data-step="3">
-                    <span>3</span>
-                    Подтверждение
-                </div>
-            </div>
-
-            <!-- Шаги бронирования -->
-            <div class="booking-steps">
-                <!-- Шаг 1: Выбор хостела -->
-                <div class="booking-step active" data-step="1">
-                    <h2>Выберите хостел</h2>
-                    <p>Выберите один из наших хостелов в Москве</p>
-                    
-                    <div class="hostel-cards">
-                        <div class="hostel-card" data-hostel="Бульвар Дмитрия Донского">
-                            <div class="hostel-image" style="background-image: url('images/room1.jpg');"></div>
-                            <div class="hostel-info">
-                                <h3>м. Бульвар Дмитрия Донского</h3>
-                                <p>Просторный номер с 4 отдельными кроватями</p>
-                                <div class="hostel-price">от 500₽/ночь</div>
-                                <div class="hostel-select"></div>
-                            </div>
-                        </div>
-                        
-                        <div class="hostel-card" data-hostel="Пражская">
-                            <div class="hostel-image" style="background-image: url('images/room2.jpg');"></div>
-                            <div class="hostel-info">
-                                <h3>м. Пражская</h3>
-                                <p>Комфортабельный номер для большой компании</p>
-                                <div class="hostel-price">от 500₽/ночь</div>
-                                <div class="hostel-select"></div>
-                            </div>
-                        </div>
-                        
-                        <div class="hostel-card" data-hostel="Нахимовский проспект">
-                            <div class="hostel-image" style="background-image: url('images/room3.jpg');"></div>
-                            <div class="hostel-info">
-                                <h3>м. Нахимовский проспект</h3>
-                                <p>Современный хостел с панорамными окнами</p>
-                                <div class="hostel-price">от 500₽/ночь</div>
-                                <div class="hostel-select"></div>
-                            </div>
-                        </div>
-                        
-                        <div class="hostel-card" data-hostel="Балтийская">
-                            <div class="hostel-image" style="background-image: url('images/room4.jpg');"></div>
-                            <div class="hostel-info">
-                                <h3>м. Балтийская</h3>
-                                <p>Стильный хостел в историческом районе</p>
-                                <div class="hostel-price">от 500₽/ночь</div>
-                                <div class="hostel-select"></div>
-                            </div>
-                        </div>
+            <!-- Информация о бронировании -->
+            <div class="booking-info">
+                <div class="info-card">
+                    <div class="info-icon">
+                        <i class="fas fa-phone"></i>
+                    </div>
+                    <div class="info-content">
+                        <h3>Консультация по телефону</h3>
+                        <p>Получите ответы на все вопросы и уточните наличие мест:</p>
+                        <a href="tel:+74992262016" class="info-phone">+7 (499) 226-20-16</a>
+                        <p>Мы доступны ежедневно с 9:00 до 22:00</p>
                     </div>
                 </div>
 
-                <!-- Шаг 2: Выбор дат -->
-                <div class="booking-step" data-step="2">
-                    <h2>Выберите даты проживания</h2>
-                    <p>Укажите даты заезда и выезда</p>
-                    
-                    <div class="date-selection">
-                        <div class="form-group">
-                            <label for="checkin-date">Дата заезда</label>
-                            <input type="text" id="checkin-date" name="checkin-date" readonly>
-                        </div>
-                        
-                        <div class="form-group">
-                            <label for="checkout-date">Дата выезда</label>
-                            <input type="text" id="checkout-date" name="checkout-date" readonly>
-                        </div>
+                <div class="info-card">
+                    <div class="info-icon">
+                        <i class="fas fa-user"></i>
                     </div>
-                    
-                    <div class="calendar-placeholder">
-                        <div class="calendar-loading">
-                            <i class="fas fa-spinner fa-spin"></i>
-                            <p>Загрузка календаря...</p>
-                        </div>
-                    </div>
-                    
-                </div>
-
-                <!-- Шаг 3: Подтверждение -->
-                <div class="booking-step" data-step="3">
-                    <h2>Подтверждение бронирования</h2>
-                    <p>Проверьте детали вашего бронирования</p>
-                    
-                    <div class="booking-summary">
-                        <div class="summary-item">
-                            <span>Хостел:</span>
-                            <span id="summary-hostel">Не выбран</span>
-                        </div>
-                        <div class="summary-item">
-                            <span>Даты:</span>
-                            <span id="summary-dates">Не выбраны</span>
-                        </div>
-                        <div class="summary-item">
-                            <span>Цена за ночь:</span>
-                            <span id="price-per-night">800₽</span>
-                        </div>
-                        <div class="summary-item">
-                            <span>Количество ночей:</span>
-                            <span id="summary-nights">0</span>
-                        </div>
-                        <div class="summary-item total">
-                            <span>Итого:</span>
-                            <span id="summary-total">0₽</span>
-                        </div>
-                    
-                    <div class="personal-info">
-                        <h3>Ваши контактные данные</h3>
-                        <p>Пожалуйста, заполните информацию для связи</p>
-                        
-                        <div class="form-group">
-                            <input type="text" id="name" name="name" placeholder="Ваше имя" required>
-                            <label for="name">Имя</label>
-                        </div>
-                        
-                        <div class="form-group">
-                            <input type="email" id="email" name="email" placeholder="Ваш email" required>
-                            <label for="email">Email</label>
-                        </div>
-                        
-                        <div class="form-group">
-                            <input type="tel" id="phone" name="phone" placeholder="Ваш телефон">
-                            <label for="phone">Телефон</label>
-                        </div>
-                        
-                        <div class="form-group">
-                            <textarea id="comments" name="comments" placeholder="Дополнительные пожелания"></textarea>
-                            <label for="comments">Комментарии</label>
-                        </div>
+                    <div class="info-content">
+                        <h3>Бронирование</h3>
+                        <p>Бронирование номера возможно только при личном визите в хостел.</p>
+                        <p>Посетите любой из наших хостелов для заключения договора и получения ключей:</p>
+                        <p>Адреса: м. Бульвар Дмитрия Донского, м. Пражская, м. Нахимовский проспект, м. Балтийская</p>
                     </div>
                 </div>
             </div>
-            
-            <!-- Навигация по шагам -->
-            <div class="booking-controls">
-                <button class="btn btn-prev" disabled>
-                    <i class="fas fa-chevron-left"></i>
-                    <span>Назад</span>
-                </button>
+
+            <!-- Тарифы по хостелам -->
+            <section class="pricing-section">
+                <h2>Тарифы по хостелам</h2>
+                <p>Выберите хостел, чтобы увидеть доступные цены</p>
                 
-                <button class="btn btn-next">
-                    <span>Далее</span>
-                    <i class="fas fa-chevron-right"></i>
-                </button>
+                <div class="hostel-tabs">
+                    <button class="tab-btn active" data-hostel="donskoy">м. Бульвар Дмитрия Донского</button>
+                    <button class="tab-btn" data-hostel="prazhskaya">м. Пражская</button>
+                    <button class="tab-btn" data-hostel="nahimovsky">м. Нахимовский проспект</button>
+                    <button class="tab-btn" data-hostel="baltiyskaya">м. Балтийская</button>
+                </div>
+
+                <div class="pricing-content">
+                    <div class="price-table active" id="donskoy-prices">
+                        <div class="table-header">
+                            <div>Количество ночей</div>
+                            <div>Цена за ночь</div>
+                            <div>Общая стоимость</div>
+                        </div>
+                        <div class="table-row">
+                            <div>1-7 ночей</div>
+                            <div>800₽</div>
+                            <div>от 800₽</div>
+                        </div>
+                        <div class="table-row">
+                            <div>8-14 ночей</div>
+                            <div>700₽</div>
+                            <div>от 5 600₽</div>
+                        </div>
+                        <div class="table-row">
+                            <div>15-29 ночей</div>
+                            <div>600₽</div>
+                            <div>от 9 000₽</div>
+                        </div>
+                        <div class="table-row highlight">
+                            <div>30 ночей и более</div>
+                            <div>500₽</div>
+                            <div>от 15 000₽</div>
+                        </div>
+                    </div>
+
+                    <div class="price-table" id="prazhskaya-prices">
+                        <div class="table-header">
+                            <div>Количество ночей</div>
+                            <div>Цена за ночь</div>
+                            <div>Общая стоимость</div>
+                        </div>
+                        <div class="table-row">
+                            <div>1-7 ночей</div>
+                            <div>800₽</div>
+                            <div>от 800₽</div>
+                        </div>
+                        <div class="table-row">
+                            <div>8-14 ночей</div>
+                            <div>700₽</div>
+                            <div>от 5 600₽</div>
+                        </div>
+                        <div class="table-row">
+                            <div>15-29 ночей</div>
+                            <div>600₽</div>
+                            <div>от 9 000₽</div>
+                        </div>
+                        <div class="table-row highlight">
+                            <div>30 ночей и более</div>
+                            <div>500₽</div>
+                            <div>от 15 000₽</div>
+                        </div>
+                    </div>
+
+                    <div class="price-table" id="nahimovsky-prices">
+                        <div class="table-header">
+                            <div>Количество ночей</div>
+                            <div>Цена за ночь</div>
+                            <div>Общая стоимость</div>
+                        </div>
+                        <div class="table-row">
+                            <div>1-7 ночей</div>
+                            <div>800₽</div>
+                            <div>от 800₽</div>
+                        </div>
+                        <div class="table-row">
+                            <div>8-14 ночей</div>
+                            <div>700₽</div>
+                            <div>от 5 600₽</div>
+                        </div>
+                        <div class="table-row">
+                            <div>15-29 ночей</div>
+                            <div>600₽</div>
+                            <div>от 9 000₽</div>
+                        </div>
+                        <div class="table-row highlight">
+                            <div>30 ночей и более</div>
+                            <div>500₽</div>
+                            <div>от 15 000₽</div>
+                        </div>
+                    </div>
+
+                    <div class="price-table" id="baltiyskaya-prices">
+                        <div class="table-header">
+                            <div>Количество ночей</div>
+                            <div>Цена за ночь</div>
+                            <div>Общая стоимость</div>
+                        </div>
+                        <div class="table-row">
+                            <div>1-7 ночей</div>
+                            <div>800₽</div>
+                            <div>от 800₽</div>
+                        </div>
+                        <div class="table-row">
+                            <div>8-14 ночей</div>
+                            <div>700₽</div>
+                            <div>от 5 600₽</div>
+                        </div>
+                        <div class="table-row">
+                            <div>15-29 ночей</div>
+                            <div>600₽</div>
+                            <div>от 9 000₽</div>
+                        </div>
+                        <div class="table-row highlight">
+                            <div>30 ночей и более</div>
+                            <div>500₽</div>
+                            <div>от 15 000₽</div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Дополнительная информация -->
+            <section class="additional-info">
+                <h2>Дополнительная информация</h2>
                 
-                <button class="btn btn-submit">
-                    <span>Подтвердить бронирование</span>
-                    <i class="fas fa-paper-plane"></i>
-                </button>
-            </div>
+                <div class="info-grid">
+                    <div class="info-item">
+                        <i class="fas fa-bed"></i>
+                        <h3>Что включено в стоимость</h3>
+                        <ul>
+                            <li>Проживание в выбранном номере</li>
+                            <li>Постельное белье и полотенце</li>
+                            <li>Доступ к общей кухне</li>
+                            <li>Бесплатный Wi-Fi</li>
+                            <li>Круглосуточный доступ</li>
+                        </ul>
+                    </div>
+
+                    <div class="info-item">
+                        <i class="fas fa-ruble-sign"></i>
+                        <h3>Условия оплаты</h3>
+                        <ul>
+                            <li>Оплата наличными при заселении</li>
+                            <li>Банковские карты (Visa, MasterCard, МИР)</li>
+                            <li>Для длительного проживания - предоплата 50%</li>
+                            <li>НДС включен в стоимость</li>
+                        </ul>
+                    </div>
+
+                    <div class="info-item">
+                        <i class="fas fa-ban"></i>
+                        <h3>Правила отмены</h3>
+                        <ul>
+                            <li>Бесплатная отмена за 24 часа</li>
+                            <li>При отмене менее чем за 24 часа - удерживается 50% стоимости</li>
+                            <li>При неявке - удерживается 100% стоимости первой ночи</li>
+                        </ul>
+                    </div>
+
+                    <div class="info-item">
+                        <i class="fas fa-clock"></i>
+                        <h3>Время заселения/выезда</h3>
+                        <ul>
+                            <li>Заселение: с 14:00</li>
+                            <li>Выезд: до 12:00</li>
+                            <li>Раннее заселение/поздний выезд - по договоренности</li>
+                            <li>Круглосуточная стойка регистрации</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+            <!-- CTA секция -->
+            <section class="cta-section">
+                <div class="cta-content">
+                    <h2>Готовы забронировать номер?</h2>
+                    <p>Посетите наш хостел для заключения договора или позвоните для консультации</p>
+                    <div class="cta-buttons">
+                        <a href="tel:+74992262016" class="btn btn-primary">
+                            <i class="fas fa-phone"></i>
+                            Позвонить для консультации
+                        </a>
+                    </div>
+                </div>
+            </section>
         </div>
     </main>
 
@@ -250,33 +303,6 @@
         </div>
     </footer>
 
-    <!-- Модальное окно подтверждения -->
-    <div class="modal-overlay" id="confirmation-modal">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h2>Бронирование подтверждено!</h2>
-                <button class="modal-close"><i class="fas fa-times"></i></button>
-            </div>
-            <div class="modal-body">
-                <div class="confirmation-icon">
-                    <i class="fas fa-check-circle"></i>
-                </div>
-                <p>Спасибо за бронирование в нашем хостеле. Детали бронирования были отправлены на ваш email.</p>
-                <div class="confirmation-details">
-                    <p><strong>Номер бронирования:</strong> <span id="booking-number">HST-2025-XXXX</span></p>
-                    <p><strong>Хостел:</strong> <span id="confirmation-hostel">Не указан</span></p>
-                    <p><strong>Даты:</strong> <span id="confirmation-dates">Не указаны</span></p>
-                    <p><strong>Итого:</strong> <span id="confirmation-total">0₽</span></p>
-                </div>
-            </div>
-            <div class="modal-footer">
-                <button class="btn btn-modal" id="modal-close-btn">Закрыть</button>
-                <a href="index.html" class="btn btn-outline">На главную</a>
-            </div>
-        </div>
-    </div>
-
     <script src="booking.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.4/gsap.min.js"></script>
 </body>
 </html>
