@@ -921,3 +921,45 @@ document.addEventListener('DOMContentLoaded', () => {
     initCertificates();
     // ... остальной код инициализации ...
 });
+
+window.addEventListener('load', () => {
+    document.body.classList.add('loaded');
+});
+
+function initFormValidation() {
+    const form = document.getElementById('contact-form');
+    const inputs = form.querySelectorAll('input, textarea');
+    
+    inputs.forEach(input => {
+        input.addEventListener('blur', (e) => {
+            validateField(e.target);
+        });
+        
+        input.addEventListener('input', (e) => {
+            clearError(e.target);
+        });
+    });
+}
+
+function validateField(field) {
+    if (!field.value.trim()) {
+        showError(field, 'Это поле обязательно для заполнения');
+    } else if (field.type === 'email' && !isValidEmail(field.value)) {
+        showError(field, 'Введите корректный email');
+    }
+}
+
+function initScrollProgress() {
+    const progressBar = document.createElement('div');
+    progressBar.className = 'scroll-progress';
+    document.body.appendChild(progressBar);
+    
+    window.addEventListener('scroll', () => {
+        const winHeight = window.innerHeight;
+        const docHeight = document.documentElement.scrollHeight;
+        const scrollTop = window.pageYOffset;
+        const scrollPercent = (scrollTop / (docHeight - winHeight)) * 100;
+        
+        progressBar.style.width = scrollPercent + '%';
+    });
+}

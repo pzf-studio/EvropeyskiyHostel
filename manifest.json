@@ -1,0 +1,9 @@
+{
+  "name": "Evropeyskiy Hostel",
+  "short_name": "EHostel",
+  "description": "Сеть мини-отелей в Москве",
+  "start_url": "/",
+  "display": "standalone",
+  "theme_color": "#1e3a8a",
+  "background_color": "#1a1a1a"
+}
