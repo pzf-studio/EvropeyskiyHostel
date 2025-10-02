@@ -289,97 +289,6 @@ function initNavIndicator() {
     });
 }
 
-// ==================== Система частиц для hero-секции ====================
-const initParticles = () => {
-    const canvas = document.getElementById('particle-canvas');
-    if (!canvas) return;
-    
-    const ctx = canvas.getContext('2d');
-    canvas.width = window.innerWidth;
-    canvas.height = window.innerHeight;
-    
-    const particles = [];
-    const particleCount = 150;
-    
-    // Создание частиц
-    for (let i = 0; i < particleCount; i++) {
-        particles.push({
-            x: Math.random() * canvas.width,
-            y: Math.random() * canvas.height,
-            size: Math.random() * 3 + 1,
-            speedX: (Math.random() - 0.5) * 0.5,
-            speedY: (Math.random() - 0.5) * 0.5,
-            color: `hsla(${Math.random() * 60 + 180}, 100%, 70%, ${Math.random() * 0.5 + 0.1})`
-        });
-    }
-    
-    // Отслеживание позиции мыши
-    const mouse = {
-        x: null,
-        y: null,
-        radius: 100
-    };
-    
-    window.addEventListener('mousemove', (event) => {
-        mouse.x = event.x;
-        mouse.y = event.y;
-    });
-    
-    // Анимация частиц
-    const animateParticles = () => {
-        ctx.clearRect(0, 0, canvas.width, canvas.height);
-        
-        particles.forEach(p => {
-            // Движение частиц
-            p.x += p.speedX;
-            p.y += p.speedY;
-            
-            // Реакция на курсор мыши
-            const dx = p.x - mouse.x;
-            const dy = p.y - mouse.y;
-            const distance = Math.sqrt(dx * dx + dy * dy);
-            
-            if (distance < mouse.radius) {
-                const force = (mouse.radius - distance) / mouse.radius;
-                const angle = Math.atan2(dy, dx);
-                p.x += Math.cos(angle) * force * 5;
-                p.y += Math.sin(angle) * force * 5;
-            }
-            
-            // Переход через границы
-            if (p.x < 0) p.x = canvas.width;
-            if (p.x > canvas.width) p.x = 0;
-            if (p.y < 0) p.y = canvas.height;
-            if (p.y > canvas.height) p.y = 0;
-            
-            // Отрисовка частицы
-            ctx.beginPath();
-            ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
-            ctx.fillStyle = p.color;
-            ctx.fill();
-            
-            // Соединение частиц линиями
-            particles.forEach(p2 => {
-                const dx = p.x - p2.x;
-                const dy = p.y - p2.y;
-                const distance = Math.sqrt(dx * dx + dy * dy);
-                
-                if (distance < 100) {
-                    ctx.beginPath();
-                    ctx.strokeStyle = `hsla(180, 100%, 70%, ${0.1 * (1 - distance/100)})`;
-                    ctx.lineWidth = 0.5;
-                    ctx.moveTo(p.x, p.y);
-                    ctx.lineTo(p2.x, p2.y);
-                    ctx.stroke();
-                }
-            });
-        });
-        
-        requestAnimationFrame(animateParticles);
-    };
-    
-    animateParticles();
-};
 
 // ==================== Магнитный эффект для кнопки ====================
 const initMagneticEffect = () => {
@@ -487,13 +396,13 @@ document.addEventListener('DOMContentLoaded', () => {
     initNavIndicator();
     
     // Инициализация системы частиц
-    initParticles();
+  
     
     // Инициализация магнитного эффекта для кнопки
     initMagneticEffect();
     
     // Инициализация параллакс-эффекта
-    initBookingSystem();
+    //initBookingSystem();
     
     // Инициализация 3D сцены
     initThreeJS();
@@ -963,3 +872,120 @@ function initScrollProgress() {
         progressBar.style.width = scrollPercent + '%';
     });
 }
+
+function initContactForm() {
+    const contactForm = document.getElementById('contact-form');
+    const notification = document.getElementById('form-notification');
+    const submitBtn = document.getElementById('submit-btn');
+
+    if (!contactForm) return;
+
+    // Маска для телефона
+    const phoneInput = document.getElementById('phone');
+    if (phoneInput) {
+        phoneInput.addEventListener('input', function(e) {
+            let x = e.target.value.replace(/\D/g, '').match(/(\d{0,1})(\d{0,3})(\d{0,3})(\d{0,2})(\d{0,2})/);
+            e.target.value = '+7' + (x[2] ? ' (' + x[2] : '') + (x[3] ? ') ' + x[3] : '') + (x[4] ? '-' + x[4] : '') + (x[5] ? '-' + x[5] : '');
+        });
+    }
+
+    contactForm.addEventListener('submit', async function(e) {
+        e.preventDefault();
+        
+        if (!validateForm()) return;
+
+        showNotification('📤 Отправляем вашу заявку...', 'sending');
+        submitBtn.disabled = true;
+        submitBtn.classList.add('sending');
+
+        try {
+            // Реальная отправка через EmailJS
+            await sendFormData(new FormData(contactForm));
+            
+            showNotification('✅ Заявка успешно отправлена! Мы свяжемся с вами в течение 15 минут.', 'success');
+            contactForm.reset();
+            
+        } catch (error) {
+            console.error('Ошибка отправки:', error);
+            showNotification('❌ Ошибка отправки. Пожалуйста, позвоните нам: +7 (499) 226-20-16', 'error');
+        } finally {
+            submitBtn.disabled = false;
+            submitBtn.classList.remove('sending');
+        }
+    });
+
+    function validateForm() {
+        const name = document.getElementById('name').value.trim();
+        const phone = document.getElementById('phone').value.trim();
+        const hostel = document.getElementById('hostel').value;
+        const message = document.getElementById('message').value.trim();
+
+        if (!name) {
+            showNotification('❌ Пожалуйста, введите ваше имя', 'error');
+            return false;
+        }
+
+        if (!phone || phone.length < 16) {
+            showNotification('❌ Пожалуйста, введите корректный номер телефона', 'error');
+            return false;
+        }
+
+        if (!hostel) {
+            showNotification('❌ Пожалуйста, выберите хостел', 'error');
+            return false;
+        }
+
+        if (!message) {
+            showNotification('❌ Пожалуйста, напишите ваше сообщение', 'error');
+            return false;
+        }
+
+        return true;
+    }
+
+    function showNotification(text, type) {
+        notification.textContent = text;
+        notification.className = 'form-notification ' + type;
+        notification.style.display = 'block';
+        
+        if (type === 'success') {
+            setTimeout(() => {
+                notification.style.display = 'none';
+            }, 5000);
+        }
+    }
+
+    async function sendFormData(formData) {
+        // Инициализация EmailJS
+        if (typeof emailjs === 'undefined') {
+            throw new Error('EmailJS не загружен');
+        }
+        
+        // Инициализируем с вашим PUBLIC KEY
+        emailjs.init("wo0rKz7axiL0VJKpz"); // Замените на ваш реальный Public Key
+        
+        const templateParams = {
+            from_name: formData.get('name'),
+            from_phone: formData.get('phone'),
+            from_email: formData.get('email') || 'Не указан',
+            hostel: formData.get('hostel'),
+            message: formData.get('message'),
+            to_email: "evropeyskiyhostel@mail.ru", // Email для получения заявок
+            date: new Date().toLocaleString('ru-RU')
+        };
+
+        // ЗАМЕНИТЕ НА ВАШИ РЕАЛЬНЫЕ ID
+        const serviceID = "service_oc4l58t"; // Ваш Service ID
+        const templateID = "template_jbi5tpj"; // Ваш Template ID
+
+        console.log('Отправка данных через EmailJS:', templateParams);
+        
+        return emailjs.send(serviceID, templateID, templateParams);
+    }
+}
+
+// Добавьте вызов в DOMContentLoaded
+document.addEventListener('DOMContentLoaded', function() {
+    initContactForm();
+    // ... остальной код инициализации
+});

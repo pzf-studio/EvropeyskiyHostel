@@ -296,8 +296,6 @@
         </div>
     </section>
 
-    <!-- Бронирование -->
-    <!-- Секция обратной связи -->
     <section id="feedback" class="section">
         <div class="container">
             <h2 class="section-title">Обратная связь</h2>
@@ -306,29 +304,42 @@
                     <form id="contact-form">
                         <div class="form-group">
                             <input type="text" id="name" name="name" placeholder="Ваше имя" required>
-                            <label for="name">Имя</label>
+                            <label for="name">Имя *</label>
                         </div>
                         <div class="form-group">
-                            <input type="email" id="email" name="email" placeholder="Ваш email" required>
+                            <input type="tel" id="phone" name="phone" placeholder="+7 (999) 123-45-67" required>
+                            <label for="phone">Телефон *</label>
+                        </div>
+                        <div class="form-group">
+                            <input type="email" id="email" name="email" placeholder="your@email.com">
                             <label for="email">Email</label>
                         </div>
                         <div class="form-group">
-                            <input type="tel" id="phone" name="phone" placeholder="Ваш телефон">
-                            <label for="phone">Телефон</label>
+                            <select id="hostel" name="hostel" required>
+                                <option value="">Выберите хостел</option>
+                                <option value="donskoy">м. Бульвар Дмитрия Донского</option>
+                                <option value="prazhskaya">м. Пражская</option>
+                                <option value="nahimovsky">м. Нахимовский проспект</option>
+                                <option value="baltiyskaya">м. Балтийская</option>
+                            </select>
+                            <label for="hostel">Интересующий хостел *</label>
                         </div>
                         <div class="form-group">
-                            <textarea id="message" name="message" placeholder="Ваше сообщение" required></textarea>
-                            <label for="message">Сообщение</label>
+                            <textarea id="message" name="message" placeholder="Ваше сообщение, даты проживания, количество гостей..." required></textarea>
+                            <label for="message">Сообщение *</label>
                         </div>
-                        <button type="submit" class="btn btn-submit magnetic">
-                            <span>Отправить сообщение</span>
+                        
+                        <div class="form-notification" id="form-notification" style="display: none;"></div>
+                        
+                        <button type="submit" class="btn btn-submit magnetic" id="submit-btn">
+                            <span>Отправить заявку</span>
                             <i class="fas fa-paper-plane"></i>
                         </button>
                     </form>
                 </div>
                 <div class="feedback-info">
                     <h3>Свяжитесь с нами</h3>
-                    <p>Если у вас есть вопросы или предложения, заполните форму или используйте контактные данные ниже:</p>
+                    <p>Заполните форму обратной связи, и мы свяжемся с вами в течение 30 минут для уточнения деталей бронирования.</p>
                     <ul class="contact-details">
                         <li>
                             <i class="fas fa-phone"></i>
@@ -343,16 +354,9 @@
                             <span>Круглосуточная поддержка</span>
                         </li>
                     </ul>
-                    <div class="social-links">
-                        <a href="#" class="social-link">
-                            <i class="fab fa-vk"></i>
-                        </a>
-                        <a href="#" class="social-link">
-                            <i class="fab fa-telegram"></i>
-                        </a>
-                        <a href="#" class="social-link">
-                            <i class="fab fa-instagram"></i>
-                        </a>
+                    <div class="response-time">
+                        <i class="fas fa-bolt"></i>
+                        <span>Среднее время ответа: 15 минут</span>
                     </div>
                 </div>
             </div>
@@ -495,6 +499,7 @@
     </footer>
 
     <script src="script.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
     <script src="https://api-maps.yandex.ru/2.1/?apikey=ваш_API_ключ&lang=ru_RU"></script>
     <script>
         ymaps.ready(init);
@@ -579,5 +584,6 @@
             }
         }
     </script>
+    <noscript><div><img src="https://mc.yandex.ru/watch/XXXXXX" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
 </body>
 </html>

@@ -1181,3 +1181,59 @@ body {
     background: rgba(59, 130, 246, 0.3);
     color: white;
 }
+/* Мобильная оптимизация */
+@media (max-width: 768px) {
+    /* Упрощаем анимации */
+    .magnetic:hover {
+        transform: translateY(-3px);
+    }
+    
+    /* Увеличиваем touch targets */
+    .btn, .nav-links a, .form-group input, .form-group select {
+        min-height: 44px;
+        min-width: 44px;
+    }
+    
+    /* Скрываем тяжелые элементы на мобильных */
+    #particle-canvas,
+    #webgl-container {
+        display: none !important;
+    }
+    
+    /* Упрощаем hero секцию */
+    .hero-title {
+        font-size: 2.2rem;
+    }
+    
+    .hero-subtitle {
+        font-size: 1.1rem;
+    }
+    
+    /* Skeleton loading */
+    .skeleton {
+        background: linear-gradient(90deg, #3d3d3d 25%, #555 50%, #3d3d3d 75%);
+        background-size: 200% 100%;
+        animation: loading 1.5s infinite;
+        border-radius: 4px;
+    }
+    
+    @keyframes loading {
+        0% { background-position: 200% 0; }
+        100% { background-position: -200% 0; }
+    }
+}
+
+/* Улучшение доступности */
+@media (prefers-reduced-motion: reduce) {
+    * {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+}
+
+/* Улучшение фокуса для доступности */
+a:focus, button:focus, input:focus, select:focus, textarea:focus {
+    outline: 3px solid var(--blue-400);
+    outline-offset: 2px;
+}
